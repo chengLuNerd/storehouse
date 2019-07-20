@@ -6,10 +6,10 @@ config = {
 
 
 with ClusterRpcProxy(config) as cluster_rpc:
-    """
+    
     result = cluster_rpc.service_x.remote_method("hellø")
     print(result)
-    """
+    
 
     """
     hello_res = cluster_rpc.service_x.remote_method.call_async("hello")
@@ -18,6 +18,7 @@ with ClusterRpcProxy(config) as cluster_rpc:
 
     print(hello_res.result())  # "hello-x-y"
     print(world_res.result())  # "world-x-y"
-    """
+
 
     cluster_rpc.service_dispatch.dispatching_method.call_async('100')
+    """

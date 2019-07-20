@@ -36,6 +36,11 @@ def date_preprocess():
         result = rpc.service_dispatch.dispatching_load.call_async(studyuid)
         print("put the requet into queue, result %s" % studyuid) 
         return msg, 200
+
+
+@app.route('/')
+def main():
+    return 'helo world'
     
 
 if __name__ == "__main__":

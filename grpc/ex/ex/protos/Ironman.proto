@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.helloworld";
+option java_outer_classname = "HelloWorldProto";
+option objc_class_prefix = "HLW";
+
+package helloworld;
+
+
+service BackendRender {
+  // Sends initCommand
+  rpc InitHandler (InitCommand) returns (InitReply) {}
+
+  rpc RenderHandler (RenderCommand) returns (RenderReply) {}
+
+}
+
+service SystemDispatcher {
+	// register services
+	rpc Regist (RegistMsg) returns (RegistResultMsg) {}
+
+	rpc GetAddress (AddressMsg) returns (AddressReturnMsg) {}
+}
+
+// The request message containing the init command
+message InitCommand {
+  string name = 1;
+}
+
+// The response message containing the init result
+message InitReply {
+  string message = 1;
+}
+
+// The request message containing the render command
+message RenderCommand {
+  string name = 1;
+}
+
+// The response message containing the render result
+message RenderReply {
+  string message = 1;
+}
+
+message RegistMsg {
+  string name = 1;
+  string address = 2;
+}
+
+message RegistResultMsg {
+  string status = 1;
+}
+
+message AddressMsg {
+  string name = 1;
+}
+
+message AddressReturnMsg {
+  string address = 1;
+}

@@ -1,0 +1,3 @@
+Fri, 31 May 2019 17:35:36 log.py[line:12] WARNING warn msg
+Fri, 31 May 2019 17:35:36 log.py[line:13] ERROR error msg
+Fri, 31 May 2019 17:35:36 log.py[line:14] CRITICAL critical msg

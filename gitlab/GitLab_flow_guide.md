@@ -48,5 +48,17 @@ GitLab issues 类似于“工单系统”，是一个发布项目相关信息的
 * 其他分支（或者fork项目的分支）进行开发
 * 通过创建MergeRequest将代码合并到master分支
 
+![img](C:\Users\cheng.lu\AppData\Local\Temp\企业微信截图_15666280438763.png)
+
 ### 创建Merge Request进行Code Review
+
+需求或Bug都是用Issue来表示
+
+任务的接收者对Issue创建Merge Request
+
+完成任务后推送代码到Merge Request对应的分支
+
+管理员对代码进行Merge
+
+
 

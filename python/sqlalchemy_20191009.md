@@ -49,6 +49,8 @@ metadata = MetaData()
 #表定义
 cookies = Table('cookies', metadata, Column('cookie_id', Integer(), primary_key=True),
                Column('cookie_name', String(50), index=True),
+               Column('cookie_recipe_url', String(255)),
+               Column('cookie_sku', String(255)),
                Column('quantity', Integer()),
                Column('unit_cost', Numeric(12, 2))) 
 
@@ -61,3 +63,26 @@ metadata.create_all(engine)
 
 另外创建一个users表，orders表，line_items表
 
+```python
+users = Table('users', metadata, Column('user-id', Integer(), primary_key=True),
+              Column('customer_number', Integer(), autoincrement=True),
+              Column('username', String(15), nullable=False, unique=True),
+              Column('email-address', String(255), nullable=False),
+              Column('phone', String(20), nullable=False),
+              Column('password', String(25), nullable=False),
+              Column('created_on', DateTime(), default=datetime.now),
+              Column('updated_on', DateTime(), default=datetime.now, 	                                     onupdate=datetime.now)
+             )
+
+orders = Table('orders', metadata, Column('order-id', Integer(), primary_key=True),
+              Column('user_id', Foreignkey('users.user-id')),
+              Column('shipped', Boolean(), default=False))
+
+line_items = Table('line_items', metadata,
+                   Column('line_items_id', Integer(), primary_key=True),
+                   Column('order_id', ForeignKey('orders.order-id')),
+                   Column('cookie_id', ForeignKey('cookies.cookie_id')),
+                   Column('quantity', Integer()),
+                   Column('extended_cost', Numeric(12, 2))
+                  )
+```

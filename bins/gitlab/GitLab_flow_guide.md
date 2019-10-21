@@ -62,3 +62,46 @@ GitLab issues 类似于“工单系统”，是一个发布项目相关信息的
 
 
 
+## Development Workflow
+
+1. Fork
+
+2. Clone fork to local storage
+
+   git clone <remote your clone repo url>
+
+   git remote add upstream <remote original repo url>
+
+   \# Never push to upstream master
+
+   git remote set-url --push upstream no_push
+
+3. Keep your branch in sync
+
+   git fetch upstream
+
+   git checkout master
+
+   git rebase upstream/master
+
+4. Add new features
+
+   git checkout –b myfeature
+
+   \#edit code on the feature branch
+
+    \# Rebase your the master branch of your local repo
+
+   git checkout master
+
+   git rebase upstream/master
+
+​		\# make your development branch in sync with master branch
+
+​		git checkout myfeature
+
+​		git rebase -i master
+
+5. Push to your folk
+
+   git push –f <remote your clone repo url> myfeature

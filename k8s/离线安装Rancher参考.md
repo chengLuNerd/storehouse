@@ -433,7 +433,32 @@ Server: &version.Version{SemVer:"v2.15.2", GitCommit:"8dce272473e5f2a7bf58ce79bb
 2. 获取charts模板，并安装
 
 ```shell
+# 获取server-chart.zip文件并解压
 
+# 创建自签名证书
+./create_self-signed-cert.sh 
+--ssl-trusted-ip=10.6.209.26,10.6.209.27,10.6.209.28 --ssl-size=2048 --ssl-date=3650
+
+# 配置ssl证书
+kubectl create namespace cattle-system
+
+# 创建ssl证书密文
+kubectl -n cattle-system create secret tls tls-rancher-ingress --cert=./tls.crt --key=./tls.key
+
+# 创建CA证书密文
+kubectl -n cattle-system create secret generic tls-ca --from-file=cacerts.pem
+
+# helm 安装Rancher
+helm install 
+  --name rancher \
+  --namespace cattle-system \
+  --set rancherImage=registry.uih/rancher/rancher \
+  --set busyboxImage=registry.uih/rancher/busybox \
+  --set service.type=NodePort \
+  --set service.ports.nodePort=30303  \
+  --set privateCA=true \
+  --set useBundledSystemChart=true \
+  server-chart/rancher
 ```
 
 3. 查看rancher的运行状态，并访问
@@ -447,15 +472,5 @@ cattle-system               rancher-85b6f9c957-w2jxj                            
 
 访问https://10.6.209.26:30303，提示输入admin密码，并设置server_url， 稍等片刻可以看到local集群状态变成Active。
 
-
-
-### 
-
-
-
-
-
-
-
-
+![img](C:\Users\cheng.lu\AppData\Local\Temp\企业微信截图_15819324266748.png)
 

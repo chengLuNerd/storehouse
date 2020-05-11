@@ -267,10 +267,10 @@ Rancher是一套容器管理平台，使用它可以轻松的管理各种环境�
 
 ```shell
 # root 分别登录rancher-node1，rancher-node2，rancher-node3 执行如下命令
-rpm -qa container-selinux-2.107-3.el7.noarch.rpm
-rpm -qa containerd.io-1.2.10-3.2.el7.x86_64.rpm
-rpm -qa docker-ce-cli-19.03.4-3.el7.x86_64.rpm
-rpm -qa containerd.io-1.2.10-3.2.el7.x86_64.rpm
+rpm -ivh container-selinux-2.107-3.el7.noarch.rpm
+rpm -ivh containerd.io-1.2.10-3.2.el7.x86_64.rpm
+rpm -ivh docker-ce-cli-19.03.4-3.el7.x86_64.rpm
+rpm -ivh containerd.io-1.2.10-3.2.el7.x86_64.rpm
 
 # 配置使用私有仓库
 vi /etc/docker/daemon.json 
@@ -473,4 +473,10 @@ cattle-system               rancher-85b6f9c957-w2jxj                            
 访问https://10.6.209.26:30303，提示输入admin密码，并设置server_url， 稍等片刻可以看到local集群状态变成Active。
 
 ![img](C:\Users\cheng.lu\AppData\Local\Temp\企业微信截图_15819324266748.png)
+
+
+
+注意**关闭selinux**
+
+
 

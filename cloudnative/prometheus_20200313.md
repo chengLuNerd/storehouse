@@ -34,6 +34,28 @@
 - an **alertmanager** to handle alerts
 - various support tools
 
+### 概念Conceptes
+
+**数据模型**
+
+```
+<metric name>{<label name>=<label value>, ...}
+```
+
+Samples form the actual time series data. Each sample consists of:
+
+- a float64 value
+- a millisecond-precision timestamp
+
+**指标类型**
+
+* counter
+* gauge
+* histogram
+* summary
+
+**端点**是可以抓取指标的来源。为了抓取端点数据，prometheus定义了名为**目标target**的配置。一组目标称为**作业job**（相同角色的目标组）。
+
 ### 安装Prometheus
 
 下载Prometheus

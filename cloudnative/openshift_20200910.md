@@ -81,9 +81,31 @@ Get https://registry-1.docker.io/v2/: x509: certificate signed by unknown author
 
 Error response from daemon: Get https://registry-1.docker.io/v2/: x509: certificate signed by unknown authority
 
-应该是证书的问题
+应该是证书的问题。
 
+``` shell
 echo -n | openssl s_client -showcerts -connect registry-1.docker.io:443 2>/dev/null  | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /usr/local/share/ca-certificates/dockerio.crt
+
+    update-ca-certificates
+```
+
+
+
+/etc/ssl/certs/ca-certificates.crt
+
+```
+echo -n | openssl s_client -showcerts -connect registry-1.docker.io:443 2>/dev/null  | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' >> /etc/ssl/certs/ca-certificates.crt
+
+root@ks-allinone:/usr/local/share/ca-certificates# docker pull openshift/origin-control-plane:v3.11.0
+Error response from daemon: error unmarshalling content: invalid character '<' looking for beginning of value
+
+```
+
+https://www.cnblogs.com/sting2me/p/5596222.html
+
+
+
+晕，还是上不了网的问题，公司网络有代理，登录上网权限就ok了。
 
 ``` shell
 root@ks-allinone:/etc/systemd/system/docker.service.d# minishift start --vm-driver virtualbox --skip-startup-checks
@@ -98,7 +120,7 @@ Server Information ...
 OpenShift server started.
 
 The server is accessible via web console at:
-    https://192.168.99.100:8443/console
+     
 
 You are logged in as:
     User:     developer
@@ -112,7 +134,7 @@ To login as administrator:
 
 
 
-#### 容器启动minishift
+### 容器启动openshift
 
 ```shell
 docker run -d --name "origin" \
@@ -132,6 +154,7 @@ failed to run Kubelet: failed to create kubelet: misconfiguration: kubelet cgrou
 
 https://my.oschina.net/u/1777269/blog/2243827
 
+``` shell
 [root@UVM41 node_exporter-1.0.1.linux-amd64]# docker info
 Client:
  Debug Mode: false
@@ -149,4 +172,9 @@ Server:
   Native Overlay Diff: true
  Logging Driver: json-file
  **Cgroup Driver: systemd**
+```
+
+
+
+晕，还是访问不了，web访问的时候报503的错误。
 
